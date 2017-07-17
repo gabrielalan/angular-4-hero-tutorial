@@ -1,31 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 import HeroDetailComponent from './hero/detail/hero-detail.component';
 import HeroesComponent from './hero/list/heroes.component';
+import DashboardComponent from './hero/dashboard/dashboard.component';
 
-const Routes = RouterModule.forRoot([
-  {
-    path: 'heroes',
-    component: HeroesComponent
-  }
-]);
+import HeroService from './hero/hero.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroDetailComponent,
-    HeroesComponent
+    HeroesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    Routes
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    HeroService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
