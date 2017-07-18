@@ -1,5 +1,5 @@
 
-export default class Hero {
+export class Hero {
 	id;
 	name;
 }
