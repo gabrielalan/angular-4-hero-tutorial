@@ -20,6 +20,11 @@ export class HeroDetailComponent implements OnInit {
     private location: Location
   ) {}
 
+  save() {
+    this.heroService.update(this.hero)
+      .then(() => this.goBack());
+  }
+
   goBack() {
     this.location.back();
   }
