@@ -1,14 +1,21 @@
 label {
   display: inline-block;
-  width: 3em;
+  width: 5em;
   margin: .5em 0;
   color: #607D8B;
   font-weight: bold;
 }
-input {
+label.radio, label.checkbox {
+  display: block;
+  width: auto;
+}
+input, select {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
+}
+label.radio input, label.checkbox input {
+  height: 1em;
 }
 button {
   margin-top: 20px;

@@ -1,10 +1,51 @@
 <div>
-	<h2>{{hero.name}} details!</h2>
-	<div><label>id: </label>{{hero.id}}</div>
-	<div>
-		<label>name: </label>
-		<input [(ngModel)]="hero.name" placeholder="name"/>
-	</div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
+	<h2>Hero details!</h2>
+  <app-loader [show]="loading">
+    <!--<div><label>id: </label>{{hero.id}}</div>-->
+    <form [formGroup]="heroForm" novalidate>
+      <div>
+        <label>name: </label>
+        <input placeholder="name" formControlName="name"/>
+      </div>
+
+      <fieldset formGroupName="address">
+        <legend>Secret Lair</legend>
+        <div>
+          <label>city: </label>
+          <input class="form-control" formControlName="city">
+        </div>
+        <div>
+          <label>street: </label>
+          <input class="form-control" formControlName="street">
+        </div>
+        <div>
+          <label>zip code: </label>
+          <input class="form-control" formControlName="zip">
+        </div>
+        <div>
+          <label>state: </label>
+          <select class="form-control" formControlName="state">
+            <option *ngFor="let state of states" [value]="state">{{state}}</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <div>
+        <label class="checkbox">
+          <input type="checkbox" formControlName="sidekick">I have a sidekick.
+        </label>
+      </div>
+      <div>
+        <p>Super power:</p>
+        <label class="radio"><input type="radio" formControlName="power" value="flight">Flight</label>
+        <label class="radio"><input type="radio" formControlName="power" value="x-ray vision">X-ray vision</label>
+        <label class="radio"><input type="radio" formControlName="power" value="strength">Strength</label>
+      </div>
+      <button (click)="goBack()">Back</button>
+      <button (click)="save()">Save</button>
+    </form>
+
+    <p>Form value: {{ heroForm.value | json }}</p>
+    <p>Form status: {{ heroForm.status | json }}</p>
+  </app-loader>
 </div>
