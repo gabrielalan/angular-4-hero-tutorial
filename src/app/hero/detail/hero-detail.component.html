@@ -2,33 +2,36 @@
 	<h2>Hero details!</h2>
   <app-loader [show]="loading">
     <!--<div><label>id: </label>{{hero.id}}</div>-->
-    <form [formGroup]="heroForm" novalidate>
+    <form [formGroup]="heroForm" (ngSubmit)="save()" novalidate>
       <div>
         <label>name: </label>
         <input placeholder="name" formControlName="name"/>
       </div>
 
-      <fieldset formGroupName="address">
-        <legend>Secret Lair</legend>
-        <div>
-          <label>city: </label>
-          <input class="form-control" formControlName="city">
-        </div>
-        <div>
-          <label>street: </label>
-          <input class="form-control" formControlName="street">
-        </div>
-        <div>
-          <label>zip code: </label>
-          <input class="form-control" formControlName="zip">
-        </div>
-        <div>
-          <label>state: </label>
-          <select class="form-control" formControlName="state">
-            <option *ngFor="let state of states" [value]="state">{{state}}</option>
-          </select>
-        </div>
-      </fieldset>
+      <div formArrayName="secretLairs" class="well well-lg">
+        <fieldset *ngFor="let address of secretLairs.controls; let i=index" [formGroupName]="i">
+          <legend>Secret Lair #{{i + 1}}</legend>
+          <div>
+            <label>city: </label>
+            <input class="form-control" formControlName="city">
+          </div>
+          <div>
+            <label>street: </label>
+            <input class="form-control" formControlName="street">
+          </div>
+          <div>
+            <label>zip code: </label>
+            <input class="form-control" formControlName="zip">
+          </div>
+          <div>
+            <label>state: </label>
+            <select class="form-control" formControlName="state">
+              <option *ngFor="let state of states" [value]="state">{{state}}</option>
+            </select>
+          </div>
+        </fieldset>
+        <button (click)="addLair()" type="button">Add a Secret Lair</button>
+      </div>
 
       <div>
         <label class="checkbox">
@@ -42,7 +45,7 @@
         <label class="radio"><input type="radio" formControlName="power" value="strength">Strength</label>
       </div>
       <button (click)="goBack()">Back</button>
-      <button (click)="save()">Save</button>
+      <button type="submit" [disabled]="heroForm.pristine">Save</button>
     </form>
 
     <p>Form value: {{ heroForm.value | json }}</p>

@@ -2,6 +2,8 @@
 export class Hero {
   id;
   name;
+  power;
+  sidekick;
   addresses: Address[];
 }
 
